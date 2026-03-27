@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StreamMax IPTV – La TV Sans Limites</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #070b14;
+  --surface: #0d1424;
+  --card: #111827;
+  --accent: #e50914;
+  --accent2: #ff6b35;
+  --gold: #ffd700;
+  --text: #f0f4ff;
+  --muted: #7a8499;
+  --border: rgba(255,255,255,0.07);
+  --wa: #25D366;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ─── HEADER ─── */
+header {
+  position: fixed; top: 0; width: 100%; z-index: 100;
+  background: linear-gradient(to bottom, rgba(7,11,20,.98), transparent);
+  padding: 18px 60px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem; letter-spacing: 3px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+nav a {
+  color: var(--muted); text-decoration: none;
+  margin-left: 32px; font-size: .9rem; font-weight: 500;
+  transition: color .2s;
+}
+nav a:hover { color: var(--text); }
+.header-cta {
+  background: var(--accent); color: #fff;
+  border: none; padding: 10px 24px;
+  border-radius: 6px; font-family: 'Outfit', sans-serif;
+  font-size: .88rem; font-weight: 600; cursor: pointer;
+  transition: background .2s, transform .1s;
+  margin-left: 32px;
+}
+.header-cta:hover { background: #c00711; transform: scale(1.03); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 120px 60px 60px;
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 50%, rgba(229,9,20,.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 10% 80%, rgba(255,107,53,.1) 0%, transparent 60%),
+    linear-gradient(180deg, #070b14 0%, #0d1424 100%);
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+}
+.hero-content { position: relative; z-index: 2; max-width: 680px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(229,9,20,.15); border: 1px solid rgba(229,9,20,.4);
+  padding: 6px 16px; border-radius: 100px;
+  font-size: .8rem; font-weight: 600; color: #ff6b6b;
+  margin-bottom: 24px; letter-spacing: 1px; text-transform: uppercase;
+}
+.hero-badge span { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:.5; transform:scale(1.4); } }
+
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  line-height: .95; letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero p {
+  color: var(--muted); font-size: 1.1rem; line-height: 1.7;
+  margin-bottom: 36px; max-width: 540px;
+}
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), #c00711);
+  color: #fff; border: none; padding: 15px 36px;
+  border-radius: 8px; font-family: 'Outfit', sans-serif;
+  font-size: 1rem; font-weight: 700; cursor: pointer;
+  box-shadow: 0 8px 32px rgba(229,9,20,.35);
+  transition: transform .2s, box-shadow .2s;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(229,9,20,.5); }
+.btn-ghost {
+  background: rgba(255,255,255,.07); color: var(--text);
+  border: 1px solid var(--border); padding: 15px 36px;
+  border-radius: 8px; font-family: 'Outfit', sans-serif;
+  font-size: 1rem; font-weight: 600; cursor: pointer;
+  transition: background .2s;
+}
+.btn-ghost:hover { background: rgba(255,255,255,.12); }
+
+.hero-stats {
+  display: flex; gap: 48px; margin-top: 56px;
+  position: relative; z-index: 2;
+}
+.stat-num {
+  font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.stat-label { color: var(--muted); font-size: .82rem; font-weight: 500; letter-spacing: .5px; }
+
+/* ─── SECTION TITLES ─── */
+.section { padding: 80px 60px; }
+.section-header { text-align: center; margin-bottom: 48px; }
+.section-tag {
+  display: inline-block; color: var(--accent); font-size: .75rem;
+  font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;
+}
+.section-header h2 {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: 2px; margin-bottom: 12px;
+}
+.section-header p { color: var(--muted); max-width: 500px; margin: 0 auto; line-height: 1.6; }
+
+/* ─── MARQUEE STRIP ─── */
+.strip {
+  width: 100%; overflow: hidden;
+  padding: 10px 0; background: rgba(229,9,20,.06);
+  border-top: 1px solid rgba(229,9,20,.2);
+  border-bottom: 1px solid rgba(229,9,20,.2);
+}
+.strip-track {
+  display: flex; gap: 40px; white-space: nowrap;
+  animation: marquee-ltr 20s linear infinite;
+}
+.strip-track span {
+  font-size: .8rem; font-weight: 600; color: var(--muted);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.strip-track span b { color: var(--accent); }
+@keyframes marquee-ltr { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ─── FILM CAROUSEL ─── */
+.carousel-wrap { position: relative; overflow: hidden; }
+.carousel-track {
+  display: flex; gap: 16px;
+  animation: marquee-films 35s linear infinite;
+  width: max-content;
+}
+.carousel-track:hover { animation-play-state: paused; }
+@keyframes marquee-films { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.film-card {
+  width: 160px; height: 230px; border-radius: 12px;
+  overflow: hidden; flex-shrink: 0; position: relative;
+  cursor: pointer; transition: transform .3s;
+}
+.film-card:hover { transform: scale(1.06); z-index: 5; }
+.film-poster {
+  width: 100%; height: 100%;
+  display: flex; align-items: flex-end;
+  padding: 12px;
+  font-size: .75rem; font-weight: 600;
+  background-size: cover; background-position: center;
+}
+.film-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.85) 0%, transparent 50%);
+}
+.film-title { position: relative; z-index: 1; line-height: 1.2; }
+.film-badge {
+  position: absolute; top: 10px; right: 10px;
+  background: var(--accent); color: #fff;
+  font-size: .62rem; font-weight: 700; padding: 2px 7px; border-radius: 4px;
+}
+
+/* CHANNELS MARQUEE */
+.channels-track-wrap { overflow: hidden; }
+.channels-track {
+  display: flex; gap: 20px; width: max-content;
+  animation: marquee-ch 25s linear infinite;
+}
+.channels-track.reverse { animation-direction: reverse; }
+@keyframes marquee-ch { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.ch-card {
+  width: 110px; height: 70px; border-radius: 10px;
+  background: var(--card); border: 1px solid var(--border);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 6px; flex-shrink: 0; cursor: pointer;
+  transition: border-color .2s, transform .2s;
+}
+.ch-card:hover { border-color: rgba(229,9,20,.5); transform: scale(1.08); }
+.ch-icon { font-size: 1.5rem; }
+.ch-name { font-size: .65rem; font-weight: 600; color: var(--muted); letter-spacing: .5px; }
+
+/* ─── PRICING ─── */
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 24px; margin-top: 0;
+}
+.plan-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 18px; padding: 36px 32px;
+  position: relative; transition: transform .3s, border-color .3s;
+  overflow: hidden;
+}
+.plan-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; background: transparent;
+  transition: background .3s;
+}
+.plan-card:hover { transform: translateY(-6px); border-color: rgba(229,9,20,.4); }
+.plan-card:hover::before { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+.plan-card.featured {
+  border-color: rgba(229,9,20,.5);
+  background: linear-gradient(160deg, #1a0a0c 0%, #111827 100%);
+}
+.plan-card.featured::before { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+.featured-badge {
+  position: absolute; top: 20px; right: 20px;
+  background: var(--accent); color: #fff;
+  font-size: .72rem; font-weight: 700; padding: 4px 12px;
+  border-radius: 100px; letter-spacing: .5px;
+}
+.plan-duration {
+  font-size: .78rem; font-weight: 700; color: var(--muted);
+  letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
+}
+.plan-price {
+  font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem;
+  line-height: 1; margin-bottom: 4px;
+}
+.plan-price sup { font-size: 1.5rem; font-family: 'Outfit', sans-serif; font-weight: 700; }
+.plan-price sub { font-size: 1.2rem; font-family: 'Outfit', sans-serif; font-weight: 400; color: var(--muted); }
+.plan-desc { color: var(--muted); font-size: .85rem; margin-bottom: 28px; }
+.plan-features { list-style: none; margin-bottom: 32px; }
+.plan-features li {
+  display: flex; align-items: center; gap: 10px;
+  font-size: .88rem; padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+}
+.plan-features li:last-child { border-bottom: none; }
+.feat-check { color: #22c55e; font-size: 1rem; }
+.feat-x { color: var(--muted); font-size: 1rem; }
+.btn-plan {
+  width: 100%; padding: 14px;
+  border-radius: 10px; border: none;
+  font-family: 'Outfit', sans-serif; font-size: .95rem; font-weight: 700;
+  cursor: pointer; transition: all .2s;
+}
+.btn-plan-ghost {
+  background: rgba(255,255,255,.06); color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-plan-ghost:hover { background: rgba(255,255,255,.12); }
+.btn-plan-primary {
+  background: linear-gradient(135deg, var(--accent), #c00711); color: #fff;
+  box-shadow: 0 6px 24px rgba(229,9,20,.3);
+}
+.btn-plan-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(229,9,20,.45); }
+
+/* CART TOAST */
+.cart-toast {
+  position: fixed; bottom: 100px; right: 30px;
+  background: #22c55e; color: #fff;
+  padding: 14px 24px; border-radius: 12px;
+  font-weight: 600; font-size: .9rem;
+  transform: translateY(80px); opacity: 0;
+  transition: all .35s cubic-bezier(.34,1.56,.64,1);
+  z-index: 200; pointer-events: none;
+}
+.cart-toast.show { transform: translateY(0); opacity: 1; }
+
+/* CART ICON */
+.cart-btn {
+  position: fixed; top: 22px; right: 160px;
+  background: rgba(255,255,255,.1); color: var(--text);
+  border: 1px solid var(--border); padding: 10px 18px;
+  border-radius: 8px; cursor: pointer; font-size: .85rem;
+  font-family: 'Outfit', sans-serif; font-weight: 600;
+  z-index: 101; transition: background .2s;
+  display: flex; align-items: center; gap: 8px;
+}
+.cart-btn:hover { background: rgba(255,255,255,.16); }
+.cart-count {
+  background: var(--accent); color: #fff;
+  width: 20px; height: 20px; border-radius: 50%;
+  font-size: .7rem; display: flex; align-items: center; justify-content: center;
+}
+
+/* ─── WHATSAPP BUTTON ─── */
+.wa-btn {
+  position: fixed; bottom: 28px; right: 28px; z-index: 300;
+  background: var(--wa); color: #fff;
+  width: 62px; height: 62px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 32px rgba(37,211,102,.4);
+  cursor: pointer; text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+  animation: wa-bounce 3s ease-in-out infinite;
+}
+.wa-btn:hover { transform: scale(1.12); box-shadow: 0 12px 40px rgba(37,211,102,.6); animation: none; }
+.wa-btn svg { width: 32px; height: 32px; fill: #fff; }
+@keyframes wa-bounce { 0%,100% { transform:scale(1); } 50% { transform:scale(1.07); } }
+
+.wa-label {
+  position: fixed; bottom: 46px; right: 100px; z-index: 300;
+  background: var(--card); color: var(--text);
+  padding: 8px 16px; border-radius: 8px; font-size: .82rem; font-weight: 600;
+  border: 1px solid var(--border); white-space: nowrap;
+  animation: wa-pulse-label 3s ease-in-out infinite;
+}
+@keyframes wa-pulse-label { 0%,100%{opacity:.9} 50%{opacity:1} }
+
+/* ─── FEATURES GRID ─── */
+.features-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+.feat-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 28px 24px;
+  transition: border-color .2s, transform .2s;
+}
+.feat-card:hover { border-color: rgba(229,9,20,.4); transform: translateY(-4px); }
+.feat-icon { font-size: 2rem; margin-bottom: 14px; }
+.feat-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+.feat-card p { color: var(--muted); font-size: .84rem; line-height: 1.6; }
+
+/* ─── FAQ ─── */
+.faq-list { max-width: 720px; margin: 0 auto; }
+.faq-item {
+  border: 1px solid var(--border); border-radius: 12px;
+  margin-bottom: 12px; overflow: hidden;
+}
+.faq-q {
+  width: 100%; background: var(--card); color: var(--text);
+  border: none; padding: 18px 24px; text-align: left;
+  font-family: 'Outfit', sans-serif; font-size: .95rem; font-weight: 600;
+  cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+}
+.faq-a {
+  background: var(--surface); color: var(--muted);
+  padding: 0 24px; max-height: 0; overflow: hidden;
+  font-size: .88rem; line-height: 1.7; transition: max-height .3s, padding .3s;
+}
+.faq-a.open { max-height: 200px; padding: 16px 24px; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--surface); border-top: 1px solid var(--border);
+  padding: 48px 60px 32px;
+}
+.footer-grid { display: flex; gap: 60px; flex-wrap: wrap; margin-bottom: 40px; }
+.footer-brand .logo { font-size: 1.6rem; display: block; margin-bottom: 12px; }
+.footer-brand p { color: var(--muted); font-size: .85rem; line-height: 1.6; max-width: 260px; }
+.footer-col h4 { font-size: .85rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
+.footer-col a { display: block; color: var(--muted); text-decoration: none; font-size: .85rem; margin-bottom: 10px; transition: color .2s; }
+.footer-col a:hover { color: var(--text); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 24px; }
+.footer-bottom p { color: var(--muted); font-size: .8rem; }
+
+/* ─── MODAL ─── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.8);
+  z-index: 400; display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 20px; padding: 40px; max-width: 440px; width: 90%;
+  transform: scale(.9); transition: transform .3s;
+}
+.modal-overlay.open .modal { transform: scale(1); }
+.modal h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 8px; }
+.modal p { color: var(--muted); font-size: .9rem; margin-bottom: 24px; }
+.modal-plan-info {
+  background: rgba(229,9,20,.1); border: 1px solid rgba(229,9,20,.3);
+  border-radius: 10px; padding: 16px 20px; margin-bottom: 24px;
+}
+.modal-plan-info strong { font-size: 1.1rem; display: block; margin-bottom: 4px; }
+.modal-close { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1.5rem; float: right; }
+
+@media (max-width: 768px) {
+  header { padding: 16px 20px; }
+  nav { display: none; }
+  .hero { padding: 100px 24px 48px; }
+  .hero-stats { gap: 24px; flex-wrap: wrap; }
+  .section { padding: 60px 24px; }
+  footer { padding: 40px 24px 24px; }
+  .wa-label { display: none; }
+  .cart-btn { right: 80px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">STREAM<span style="color:#fff">MAX</span></div>
+  <nav>
+    <a href="#films">Films</a>
+    <a href="#chaines">Chaînes</a>
+    <a href="#offres">Offres</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <button class="header-cta" onclick="openModal('Essai Gratuit', '0€', '24h d\'essai')">Essai gratuit</button>
+</header>
+
+<!-- CART BUTTON -->
+<button class="cart-btn" id="cartBtn" onclick="openCartModal()">
+  🛒 Panier
+  <span class="cart-count" id="cartCount">0</span>
+</button>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span></span>Streaming Premium · HD & 4K</div>
+    <h1>LA TV <em>SANS</em><br>LIMITES</h1>
+    <p>Plus de 15 000 chaînes en direct, des milliers de films et séries en VOD, disponibles sur tous vos écrans. Qualité HD/4K garantie.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('offres').scrollIntoView({behavior:'smooth'})">Voir les offres</button>
+      <button class="btn-ghost" onclick="window.open('https://wa.me/33600000000?text=Bonjour, je veux un essai gratuit IPTV')">💬 Essai gratuit</button>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">15K+</div><div class="stat-label">Chaînes live</div></div>
+      <div><div class="stat-num">50K+</div><div class="stat-label">Films & Séries</div></div>
+      <div><div class="stat-num">4K</div><div class="stat-label">Ultra HD</div></div>
+      <div><div class="stat-num">99%</div><div class="stat-label">Uptime</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-track" id="strip1"></div>
+</div>
+
+<!-- FILMS SECTION -->
+<section class="section" id="films">
+  <div class="section-header">
+    <div class="section-tag">Catalogue VOD</div>
+    <h2>Films & Séries à la Demande</h2>
+    <p>Des milliers de titres disponibles instantanément, en HD et 4K, sans publicité.</p>
+  </div>
+  <div class="carousel-wrap">
+    <div class="carousel-track" id="filmsTrack"></div>
+  </div>
+  <br><br>
+  <div class="carousel-wrap">
+    <div class="carousel-track" style="animation-direction:reverse" id="filmsTrack2"></div>
+  </div>
+</section>
+
+<!-- CHANNELS SECTION -->
+<section class="section" id="chaines" style="padding-top:0">
+  <div class="section-header">
+    <div class="section-tag">Diffusion en direct</div>
+    <h2>Toutes Vos Chaînes Préférées</h2>
+    <p>TF1, M6, beIN Sports, Canal+, Netflix, Disney+… et des milliers d'autres.</p>
+  </div>
+  <div class="channels-track-wrap" style="margin-bottom:16px">
+    <div class="channels-track" id="chTrack1"></div>
+  </div>
+  <div class="channels-track-wrap">
+    <div class="channels-track reverse" id="chTrack2"></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" style="background: var(--surface)">
+  <div class="section-header">
+    <div class="section-tag">Pourquoi StreamMax ?</div>
+    <h2>La Meilleure Expérience IPTV</h2>
+  </div>
+  <div class="features-grid">
+    <div class="feat-card"><div class="feat-icon">📺</div><h3>Multi-écrans</h3><p>Regardez sur TV, smartphone, tablette, PC. Compatible tous appareils.</p></div>
+    <div class="feat-card"><div class="feat-icon">⚡</div><h3>Zéro Lag</h3><p>Serveurs haute performance pour un streaming fluide sans coupures.</p></div>
+    <div class="feat-card"><div class="feat-icon">🌍</div><h3>International</h3><p>Chaînes du monde entier : France, Arabie Saoudite, USA, UK, Espagne et plus.</p></div>
+    <div class="feat-card"><div class="feat-icon">🔐</div><h3>Sécurisé</h3><p>Paiement sécurisé, confidentialité garantie, aucune donnée revendue.</p></div>
+    <div class="feat-card"><div class="feat-icon">🎬</div><h3>VOD Illimitée</h3><p>Films, séries, dessins animés en illimité. Nouveau contenu chaque semaine.</p></div>
+    <div class="feat-card"><div class="feat-icon">💬</div><h3>Support 24/7</h3><p>Notre équipe répond sur WhatsApp à toute heure pour vous aider.</p></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="offres">
+  <div class="section-header">
+    <div class="section-tag">Abonnements</div>
+    <h2>Choisissez Votre Offre</h2>
+    <p>Des tarifs transparents, sans engagement caché. Résiliez quand vous voulez.</p>
+  </div>
+  <div class="pricing-grid" id="pricingGrid"></div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq" style="background:var(--surface)">
+  <div class="section-header">
+    <div class="section-tag">Questions fréquentes</div>
+    <h2>Vous Avez des Questions ?</h2>
+  </div>
+  <div class="faq-list" id="faqList"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">STREAM<span style="color:#fff">MAX</span></span>
+      <p>Le meilleur service IPTV francophone. Qualité premium, prix abordables.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <a href="#films">Films & Séries</a>
+      <a href="#chaines">Chaînes</a>
+      <a href="#offres">Abonnements</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="https://wa.me/33600000000">WhatsApp</a>
+      <a href="#">Tutoriels</a>
+      <a href="#">Configuration</a>
+    </div>
+    <div class="footer-col">
+      <h4>Légal</h4>
+      <a href="#">CGU</a>
+      <a href="#">Confidentialité</a>
+      <a href="#">Remboursement</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 StreamMax IPTV. Tous droits réservés.</p>
+    <p style="color:var(--muted);font-size:.75rem">🔒 Paiement sécurisé · Support 24/7</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP BUTTON -->
+<div class="wa-label">💬 Commander via WhatsApp</div>
+<a class="wa-btn" href="https://wa.me/33600000000?text=Bonjour, je veux m'abonner à StreamMax IPTV" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- CART TOAST -->
+<div class="cart-toast" id="cartToast">✅ Ajouté au panier !</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3>🛒 Commander</h3>
+    <p>Complétez votre commande via WhatsApp. Réponse en moins de 5 minutes.</p>
+    <div class="modal-plan-info">
+      <strong id="modalPlanName">—</strong>
+      <span id="modalPlanPrice" style="color:var(--accent);font-weight:700;font-size:1.4rem">—</span>
+      <div id="modalPlanDuration" style="color:var(--muted);font-size:.82rem;margin-top:4px">—</div>
+    </div>
+    <button class="btn-primary" style="width:100%;padding:15px;font-size:1rem" id="modalWaBtn">
+      💬 Commander sur WhatsApp
+    </button>
+    <p style="text-align:center;color:var(--muted);font-size:.78rem;margin-top:16px">Paiement sécurisé · Activation immédiate</p>
+  </div>
+</div>
+
+<script>
+// ─── DATA ───────────────────────────────────────────────
+const films = [
+  { title: "Dune 2", genre: "SF", color: "#c2910a,#5a3a00" },
+  { title: "Oppenheimer", genre: "Drame", color: "#1a1a2e,#16213e" },
+  { title: "John Wick 4", genre: "Action", color: "#0d0d0d,#1a0a00" },
+  { title: "Avatar 2", genre: "SF", color: "#002d3b,#001a22" },
+  { title: "Spider-Man", genre: "Action", color: "#1a0030,#0d001a" },
+  { title: "Barbie", genre: "Comédie", color: "#ff69b4,#c2185b" },
+  { title: "Fast X", genre: "Action", color: "#1a0a00,#2d1700" },
+  { title: "Wonka", genre: "Fantaisie", color: "#2d0d2d,#1a001a" },
+  { title: "Napoleon", genre: "Histoire", color: "#1a1400,#2d2200" },
+  { title: "The Marvels", genre: "SF", color: "#00001a,#0d0030" },
+  { title: "Mission: Impossible", genre: "Action", color: "#001a00,#002d00" },
+  { title: "Indiana Jones", genre: "Aventure", color: "#2d1a00,#1a0d00" },
+];
+
+const channels = [
+  { name: "TF1", icon: "📺" }, { name: "M6", icon: "🎬" },
+  { name: "beIN Sports", icon: "⚽" }, { name: "Canal+", icon: "🎭" },
+  { name: "BFM TV", icon: "📰" }, { name: "France 2", icon: "🏛️" },
+  { name: "RTL", icon: "🎙️" }, { name: "Eurosport", icon: "🏆" },
+  { name: "MTV", icon: "🎵" }, { name: "Discovery", icon: "🌍" },
+  { name: "Cartoon Network", icon: "🎨" }, { name: "National Geo", icon: "🌿" },
+  { name: "ESPN", icon: "🏀" }, { name: "Sky News", icon: "📡" },
+  { name: "Al Jazeera", icon: "🌐" }, { name: "BBC One", icon: "🇬🇧" },
+];
+
+const plans = [
+  {
+    name: "1 Mois", duration: "Abonnement mensuel", price: "10", currency: "€",
+    desc: "Parfait pour essayer sans engagement long terme.",
+    features: [
+      { text: "15 000+ chaînes", ok: true },
+      { text: "VOD illimitée", ok: true },
+      { text: "1 connexion simultanée", ok: true },
+      { text: "HD & Full HD", ok: true },
+      { text: "Support WhatsApp", ok: true },
+      { text: "4K Ultra HD", ok: false },
+    ],
+    featured: false, btnClass: "btn-plan-ghost"
+  },
+  {
+    name: "3 Mois", duration: "Abonnement trimestriel", price: "25", currency: "€",
+    desc: "Le meilleur rapport qualité-prix. Économisez 17%.",
+    features: [
+      { text: "15 000+ chaînes", ok: true },
+      { text: "VOD illimitée", ok: true },
+      { text: "2 connexions simultanées", ok: true },
+      { text: "HD & Full HD", ok: true },
+      { text: "Support prioritaire 24/7", ok: true },
+      { text: "4K Ultra HD", ok: true },
+    ],
+    featured: true, btnClass: "btn-plan-primary"
+  },
+  {
+    name: "6 Mois", duration: "Abonnement semestriel", price: "45", currency: "€",
+    desc: "Pour ceux qui veulent le meilleur au meilleur prix.",
+    features: [
+      { text: "15 000+ chaînes", ok: true },
+      { text: "VOD illimitée", ok: true },
+      { text: "3 connexions simultanées", ok: true },
+      { text: "4K Ultra HD", ok: true },
+      { text: "Support VIP 24/7", ok: true },
+      { text: "Mise à jour automatique", ok: true },
+    ],
+    featured: false, btnClass: "btn-plan-ghost"
+  },
+  {
+    name: "1 An", duration: "Abonnement annuel", price: "80", currency: "€",
+    desc: "Le pack ultime. Économisez plus de 33% par rapport au mensuel.",
+    features: [
+      { text: "15 000+ chaînes", ok: true },
+      { text: "VOD illimitée", ok: true },
+      { text: "4 connexions simultanées", ok: true },
+      { text: "4K Ultra HD", ok: true },
+      { text: "Support VIP 24/7", ok: true },
+      { text: "Accès béta fonctionnalités", ok: true },
+    ],
+    featured: false, btnClass: "btn-plan-ghost"
+  },
+];
+
+const faqs = [
+  { q: "Comment activer mon abonnement ?", a: "Après paiement, envoyez-nous votre commande sur WhatsApp. Nous vous envoyons vos identifiants sous moins de 15 minutes." },
+  { q: "Sur quels appareils puis-je regarder ?", a: "Smart TV (Samsung, LG, Sony), Android TV, Firestick, MAG, téléphone Android/iOS, PC/Mac, tablette. Pratiquement tous les appareils sont compatibles." },
+  { q: "La qualité est-elle vraiment en 4K ?", a: "Oui, sur les offres 3 mois et plus. La qualité dépend aussi de votre connexion internet (min. 25 Mbps recommandé pour la 4K)." },
+  { q: "Puis-je regarder les sports en direct ?", a: "Absolument ! beIN Sports, RMC Sport, Canal+, Eurosport, ESPN et des centaines de chaînes sportives du monde entier." },
+  { q: "Y a-t-il une période d'essai ?", a: "Oui, contactez-nous sur WhatsApp pour un essai gratuit de 24h sans engagement." },
+];
+
+// ─── STRIP ───────────────────────────────────────────────
+const stripItems = ["🔴 EN DIRECT", "15 000+ Chaînes", "HD & 4K", "VOD Illimitée", "Sports Live", "Séries US", "Support 24/7", "Activation Instantanée"];
+const strip = document.getElementById('strip1');
+let stripHtml = stripItems.map(s => `<span><b>●</b> ${s}</span>`).join('');
+strip.innerHTML = stripHtml + stripHtml + stripHtml + stripHtml;
+
+// ─── FILMS ───────────────────────────────────────────────
+function renderFilms(trackId, filmsArr) {
+  const track = document.getElementById(trackId);
+  const badges = ['HD', '4K', 'NOUVEAU', 'VOD', 'TOP'];
+  let html = filmsArr.map((f, i) => `
+    <div class="film-card">
+      <div class="film-poster" style="background:linear-gradient(160deg, #${Math.floor(Math.random()*0xffffff).toString(16).padStart(6,'0')}18, ${f.color.split(',').map(c=>`${c}cc`).join(',')})">
+        <div class="film-overlay"></div>
+        <div class="film-title">${f.title}<br><span style="color:var(--muted);font-size:.65rem">${f.genre}</span></div>
+      </div>
+      <div class="film-badge">${badges[i % badges.length]}</div>
+    </div>
+  `).join('');
+  track.innerHTML = html + html;
+}
+renderFilms('filmsTrack', films);
+renderFilms('filmsTrack2', [...films].reverse());
+
+// ─── CHANNELS ────────────────────────────────────────────
+function renderChannels(trackId, chArr) {
+  const track = document.getElementById(trackId);
+  let html = chArr.map(c => `
+    <div class="ch-card">
+      <div class="ch-icon">${c.icon}</div>
+      <div class="ch-name">${c.name}</div>
+    </div>
+  `).join('');
+  track.innerHTML = html + html + html;
+}
+renderChannels('chTrack1', channels);
+renderChannels('chTrack2', [...channels].reverse());
+
+// ─── PRICING ────────────────────────────────────────────
+let cartCount = 0;
+const pricingGrid = document.getElementById('pricingGrid');
+pricingGrid.innerHTML = plans.map(p => `
+  <div class="plan-card ${p.featured ? 'featured' : ''}">
+    ${p.featured ? '<div class="featured-badge">⭐ Populaire</div>' : ''}
+    <div class="plan-duration">${p.duration}</div>
+    <div class="plan-price"><sup>${p.currency}</sup>${p.price}<sub>/période</sub></div>
+    <div class="plan-desc">${p.desc}</div>
+    <ul class="plan-features">
+      ${p.features.map(f => `<li><span class="${f.ok ? 'feat-check' : 'feat-x'}">${f.ok ? '✓' : '✗'}</span> ${f.text}</li>`).join('')}
+    </ul>
+    <div style="display:flex;gap:10px;flex-direction:column">
+      <button class="btn-plan btn-plan-ghost" onclick="addToCart('${p.name}', '${p.currency}${p.price}')">🛒 Ajouter au panier</button>
+      <button class="btn-plan ${p.btnClass}" onclick="openModal('${p.name}', '${p.currency}${p.price}', '${p.duration}')">Commander maintenant</button>
+    </div>
+  </div>
+`).join('');
+
+// ─── FAQ ─────────────────────────────────────────────────
+const faqList = document.getElementById('faqList');
+faqList.innerHTML = faqs.map((f, i) => `
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggleFaq(${i})">
+      ${f.q} <span id="faq-arrow-${i}">▼</span>
+    </button>
+    <div class="faq-a" id="faq-a-${i}">${f.a}</div>
+  </div>
+`).join('');
+
+function toggleFaq(i) {
+  const a = document.getElementById(`faq-a-${i}`);
+  const arrow = document.getElementById(`faq-arrow-${i}`);
+  a.classList.toggle('open');
+  arrow.textContent = a.classList.contains('open') ? '▲' : '▼';
+}
+
+// ─── CART ─────────────────────────────────────────────────
+function addToCart(name, price) {
+  cartCount++;
+  document.getElementById('cartCount').textContent = cartCount;
+  const toast = document.getElementById('cartToast');
+  toast.textContent = `✅ ${name} ajouté au panier !`;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+function openCartModal() {
+  if (cartCount === 0) {
+    const toast = document.getElementById('cartToast');
+    toast.textContent = '🛒 Votre panier est vide';
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+    return;
+  }
+  window.open(`https://wa.me/33600000000?text=Bonjour, je veux commander ${cartCount} abonnement(s) StreamMax IPTV`, '_blank');
+}
+
+// ─── MODAL ────────────────────────────────────────────────
+function openModal(name, price, duration) {
+  document.getElementById('modalPlanName').textContent = 'Offre ' + name;
+  document.getElementById('modalPlanPrice').textContent = price;
+  document.getElementById('modalPlanDuration').textContent = duration;
+  document.getElementById('modalWaBtn').onclick = () => {
+    window.open(`https://wa.me/33600000000?text=Bonjour, je veux commander l'offre ${name} à ${price} sur StreamMax IPTV`, '_blank');
+  };
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('modalOverlay') || e.currentTarget.classList.contains('modal-close')) {
+    document.getElementById('modalOverlay').classList.remove('open');
+  }
+}
+</script>
+</body>
+</html>
