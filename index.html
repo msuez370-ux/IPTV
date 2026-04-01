@@ -303,7 +303,7 @@ nav a:hover { color: var(--text); }
 
 /* CART ICON */
 .cart-btn {
-  position: fixed; top: 22px; right: 160px;
+  position: fixed; top: 22px; right: 200px;
   background: rgba(255,255,255,.1); color: var(--text);
   border: 1px solid var(--border); padding: 10px 18px;
   border-radius: 8px; cursor: pointer; font-size: .85rem;
@@ -422,6 +422,102 @@ footer {
   .wa-label { display: none; }
   .cart-btn { right: 80px; }
 }
+/* ─── SPORTS ─── */
+.league-pill {
+  flex-shrink: 0;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 100px; padding: 8px 20px;
+  font-size: .82rem; font-weight: 600; cursor: pointer;
+  white-space: nowrap; transition: all .2s;
+  display: flex; align-items: center; gap: 8px;
+}
+.league-pill:hover, .league-pill.active {
+  border-color: var(--accent); color: var(--accent);
+  background: rgba(229,9,20,.08);
+}
+.match-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 24px; position: relative;
+  overflow: hidden; transition: transform .2s, border-color .2s;
+}
+.match-card:hover { transform: translateY(-4px); border-color: rgba(229,9,20,.4); }
+.match-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+}
+.live-dot {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(229,9,20,.15); border: 1px solid rgba(229,9,20,.3);
+  color: #ff6b6b; font-size: .7rem; font-weight: 700;
+  padding: 3px 10px; border-radius: 100px; letter-spacing: 1px;
+}
+.live-dot span {
+  width: 6px; height: 6px; background: var(--accent);
+  border-radius: 50%; animation: pulse 1.5s infinite;
+}
+.upcoming-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,215,0,.1); border: 1px solid rgba(255,215,0,.3);
+  color: var(--gold); font-size: .7rem; font-weight: 700;
+  padding: 3px 10px; border-radius: 100px; letter-spacing: 1px;
+}
+.match-teams {
+  display: flex; align-items: center; justify-content: space-between;
+  margin: 20px 0;
+}
+.team { text-align: center; flex: 1; }
+.team-flag { font-size: 2.2rem; margin-bottom: 6px; }
+.team-name { font-size: .82rem; font-weight: 600; color: var(--muted); }
+.match-score {
+  font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem;
+  padding: 0 16px; color: var(--text);
+}
+.match-score.upcoming { font-size: 1.5rem; color: var(--muted); }
+.match-meta {
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid var(--border); padding-top: 14px; margin-top: 4px;
+}
+.match-league { font-size: .75rem; color: var(--muted); }
+.match-channel {
+  font-size: .72rem; font-weight: 700;
+  background: rgba(255,255,255,.07); padding: 3px 10px; border-radius: 6px;
+}
+.watch-btn {
+  width: 100%; margin-top: 14px; padding: 11px;
+  background: linear-gradient(135deg, var(--accent), #c00711);
+  border: none; border-radius: 8px; color: #fff;
+  font-family: 'Outfit', sans-serif; font-weight: 700; font-size: .88rem;
+  cursor: pointer; transition: opacity .2s;
+}
+.watch-btn:hover { opacity: .85; }
+.sports-track {
+  display: flex; gap: 20px; width: max-content;
+  animation: marquee-films 30s linear infinite;
+}
+.sport-card {
+  width: 220px; height: 140px; border-radius: 14px;
+  overflow: hidden; flex-shrink: 0; position: relative;
+  cursor: pointer; transition: transform .3s; border: 1px solid var(--border);
+}
+.sport-card:hover { transform: scale(1.05); }
+.sport-card img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.sport-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.1) 60%);
+  display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 14px;
+}
+.sport-card-logo {
+  font-size: 1.6rem; margin-bottom: 4px;
+}
+.sport-card-name {
+  font-size: .82rem; font-weight: 700; color: #fff;
+}
+.sport-card-league {
+  font-size: .7rem; color: rgba(255,255,255,.6);
+}
 </style>
 </head>
 <body>
@@ -454,7 +550,7 @@ footer {
     <p>Plus de 15 000 chaînes en direct, des milliers de films et séries en VOD, disponibles sur tous vos écrans. Qualité HD/4K garantie.</p>
     <div class="hero-actions">
       <button class="btn-primary" onclick="document.getElementById('offres').scrollIntoView({behavior:'smooth'})">Voir les offres</button>
-      <button class="btn-ghost" onclick="window.open('https://wa.me/33600000000?text=Bonjour, je veux un essai gratuit IPTV')">💬 Essai gratuit</button>
+      <button class="btn-ghost" onclick="window.open('https://wa.me/21625032224?text=Bonjour, je veux un essai gratuit IPTV')">💬 Essai gratuit</button>
     </div>
     <div class="hero-stats">
       <div><div class="stat-num">15K+</div><div class="stat-label">Chaînes live</div></div>
@@ -498,6 +594,21 @@ footer {
   </div>
   <div class="channels-track-wrap">
     <div class="channels-track reverse" id="chTrack2"></div>
+  </div>
+</section>
+<!-- SPORTS SECTION -->
+<!-- SPORTS SECTION -->
+<section class="section" id="sports">
+  <div class="section-header">
+    <div class="section-tag">Sport en direct</div>
+    <h2>Tous les Sports en Live</h2>
+    <p>Ligue des Champions, Premier League, NBA, F1… Regardez tout en HD sur votre écran.</p>
+  </div>
+  <div style="overflow:hidden; margin-bottom:16px;">
+    <div class="sports-track" id="sportsTrack1"></div>
+  </div>
+  <div style="overflow:hidden;">
+    <div class="sports-track" style="animation-direction:reverse;" id="sportsTrack2"></div>
   </div>
 </section>
 
@@ -552,15 +663,7 @@ footer {
     </div>
     <div class="footer-col">
       <h4>Support</h4>
-      <a href="https://wa.me/33600000000">WhatsApp</a>
-      <a href="#">Tutoriels</a>
-      <a href="#">Configuration</a>
-    </div>
-    <div class="footer-col">
-      <h4>Légal</h4>
-      <a href="#">CGU</a>
-      <a href="#">Confidentialité</a>
-      <a href="#">Remboursement</a>
+      <a href="https://wa.me/21625032224">WhatsApp</a>
     </div>
   </div>
   <div class="footer-bottom">
@@ -571,7 +674,7 @@ footer {
 
 <!-- WHATSAPP BUTTON -->
 <div class="wa-label">💬 Commander via WhatsApp</div>
-<a class="wa-btn" href="https://wa.me/33600000000?text=Bonjour, je veux m'abonner à StreamMax IPTV" target="_blank" rel="noopener">
+<a class="wa-btn" href="https://wa.me/21625032225?text=Bonjour, je veux m'abonner à StreamMax IPTV" target="_blank" rel="noopener">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
   </svg>
@@ -601,29 +704,35 @@ footer {
 <script>
 // ─── DATA ───────────────────────────────────────────────
 const films = [
-  { title: "Dune 2", genre: "SF", color: "#c2910a,#5a3a00" },
-  { title: "Oppenheimer", genre: "Drame", color: "#1a1a2e,#16213e" },
-  { title: "John Wick 4", genre: "Action", color: "#0d0d0d,#1a0a00" },
-  { title: "Avatar 2", genre: "SF", color: "#002d3b,#001a22" },
-  { title: "Spider-Man", genre: "Action", color: "#1a0030,#0d001a" },
-  { title: "Barbie", genre: "Comédie", color: "#ff69b4,#c2185b" },
-  { title: "Fast X", genre: "Action", color: "#1a0a00,#2d1700" },
-  { title: "Wonka", genre: "Fantaisie", color: "#2d0d2d,#1a001a" },
-  { title: "Napoleon", genre: "Histoire", color: "#1a1400,#2d2200" },
-  { title: "The Marvels", genre: "SF", color: "#00001a,#0d0030" },
-  { title: "Mission: Impossible", genre: "Action", color: "#001a00,#002d00" },
-  { title: "Indiana Jones", genre: "Aventure", color: "#2d1a00,#1a0d00" },
+  { title: "Dune 2", genre: "SF", img: "https://image.tmdb.org/t/p/w300/czembW0Rk1Ke7lCJGahbOhdCuhV.jpg" },
+  { title: "Oppenheimer", genre: "Drame", img: "https://image.tmdb.org/t/p/w300/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg" },
+  { title: "John Wick 4", genre: "Action", img: "https://image.tmdb.org/t/p/w300/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg" },
+  { title: "Avatar 2", genre: "SF", img: "https://image.tmdb.org/t/p/w300/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg" },
+  { title: "Spider-Man", genre: "Action", img: "https://image.tmdb.org/t/p/w300/uJYYizSuA9Y3DCs0qS4qWvHfZg4.jpg" },
+  { title: "Barbie", genre: "Comédie", img: "https://www.themoviedb.org/t/p/w1280/iuFNMS8U5cb6xfzi51Dbkovj7vM.jpg" },
+  { title: "Fast X", genre: "Action", img: "https://www.themoviedb.org/t/p/w1280/v1467wvoQIXlVY5MtAqt3PUtOdH.jpg" },
+  { title: "Wonka", genre: "Fantaisie", img: "https://image.tmdb.org/t/p/w300/qhb1qOilapbapxWQn9jtRCMwXJF.jpg" },
+  { title: "Napoleon", genre: "Histoire", img: "https://www.themoviedb.org/t/p/w1280/wLgl5Q85MJ75sau35OCK4QVomR7.jpg0" },
+  { title: "The Marvels", genre: "SF", img: "https://www.themoviedb.org/t/p/w1280/bj2663TEMoMvK2G1xCjln8nJAUQ.jpg" },
+  { title: "Mission: Impossible", genre: "Action", img: "https://image.tmdb.org/t/p/w300/NNxYkU70HPurnNCSiCjYAmacwm.jpg" },
+  { title: "Indiana Jones", genre: "Aventure", img: "https://www.themoviedb.org/t/p/w1280/sRiJvXKwOBss2NxFzAtGDxncdCZ.jpg" },
 ];
-
 const channels = [
-  { name: "TF1", icon: "📺" }, { name: "M6", icon: "🎬" },
-  { name: "beIN Sports", icon: "⚽" }, { name: "Canal+", icon: "🎭" },
-  { name: "BFM TV", icon: "📰" }, { name: "France 2", icon: "🏛️" },
-  { name: "RTL", icon: "🎙️" }, { name: "Eurosport", icon: "🏆" },
-  { name: "MTV", icon: "🎵" }, { name: "Discovery", icon: "🌍" },
-  { name: "Cartoon Network", icon: "🎨" }, { name: "National Geo", icon: "🌿" },
-  { name: "ESPN", icon: "🏀" }, { name: "Sky News", icon: "📡" },
-  { name: "Al Jazeera", icon: "🌐" }, { name: "BBC One", icon: "🇬🇧" },
+  { name: "", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Logo_M6_%282020%2C_fond_clair%29.svg/langfr-330px-Logo_M6_%282020%2C_fond_clair%29.svg.png" },
+  { name: "", img: "https://www.beinsports.com/_next/static/media/bein_logo.af017869.webp?ver=03-06-2025?w=256&q=75" },
+  { name: "", img: "https://thumb.canalplus.pro/static/canalplus-logo-v2.svg" },
+  { name: "", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/BFMTV_2025.svg/langfr-330px-BFMTV_2025.svg.png" },
+  { name: "", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/France_2_2018.svg/langfr-330px-France_2_2018.svg.png" },
+  { name: "", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Eurosport_Logo_2015.svg/langfr-330px-Eurosport_Logo_2015.svg.png" },
+  { name: "", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/MTV_2021_%28brand_version%29.svg/langfr-330px-MTV_2021_%28brand_version%29.svg.png" },
+  { name: "", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/2019_Discovery_logo.svg/langfr-500px-2019_Discovery_logo.svg.png" },
+  { name: "", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/National_Geographic_Wild_logo.svg/langfr-330px-National_Geographic_Wild_logo.svg.png" },
+  { name: "", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/200px-ESPN_wordmark.svg.png" },
+  { name: "", img: "https://upload.wikimedia.org/wikipedia/fr/thumb/b/b9/Sky-news-logo_new.svg/langfr-500px-Sky-news-logo_new.svg.png" },
+  { name: "", img: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Aljazeera_eng.svg/1200px-Aljazeera_eng.svg.png" },
+  { name: "", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/BBC_One_logo_2021.svg/330px-BBC_One_logo_2021.svg.png" },
+  { name: "", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/RTL_logo.svg/langfr-500px-RTL_logo.svg.png" },
+  { name: "", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Cartoon_Network_2010_logo.svg/200px-Cartoon_Network_2010_logo.svg.png" },
 ];
 
 const plans = [
@@ -633,7 +742,6 @@ const plans = [
     features: [
       { text: "15 000+ chaînes", ok: true },
       { text: "VOD illimitée", ok: true },
-      { text: "1 connexion simultanée", ok: true },
       { text: "HD & Full HD", ok: true },
       { text: "Support WhatsApp", ok: true },
       { text: "4K Ultra HD", ok: false },
@@ -646,20 +754,18 @@ const plans = [
     features: [
       { text: "15 000+ chaînes", ok: true },
       { text: "VOD illimitée", ok: true },
-      { text: "2 connexions simultanées", ok: true },
       { text: "HD & Full HD", ok: true },
       { text: "Support prioritaire 24/7", ok: true },
       { text: "4K Ultra HD", ok: true },
     ],
-    featured: true, btnClass: "btn-plan-primary"
+    featured: false, btnClass: "btn-plan-ghost"
   },
   {
-    name: "6 Mois", duration: "Abonnement semestriel", price: "45", currency: "€",
+    name: "6 Mois", duration: "Abonnement semestriel", price: "40", currency: "€",
     desc: "Pour ceux qui veulent le meilleur au meilleur prix.",
     features: [
       { text: "15 000+ chaînes", ok: true },
       { text: "VOD illimitée", ok: true },
-      { text: "3 connexions simultanées", ok: true },
       { text: "4K Ultra HD", ok: true },
       { text: "Support VIP 24/7", ok: true },
       { text: "Mise à jour automatique", ok: true },
@@ -667,17 +773,16 @@ const plans = [
     featured: false, btnClass: "btn-plan-ghost"
   },
   {
-    name: "1 An", duration: "Abonnement annuel", price: "80", currency: "€",
+    name: "1 An", duration: "Abonnement annuel", price: "59", currency: "€",
     desc: "Le pack ultime. Économisez plus de 33% par rapport au mensuel.",
     features: [
       { text: "15 000+ chaînes", ok: true },
       { text: "VOD illimitée", ok: true },
-      { text: "4 connexions simultanées", ok: true },
       { text: "4K Ultra HD", ok: true },
       { text: "Support VIP 24/7", ok: true },
       { text: "Accès béta fonctionnalités", ok: true },
     ],
-    featured: false, btnClass: "btn-plan-ghost"
+    featured: true, btnClass: "btn-plan-primary"
   },
 ];
 
@@ -701,7 +806,7 @@ function renderFilms(trackId, filmsArr) {
   const badges = ['HD', '4K', 'NOUVEAU', 'VOD', 'TOP'];
   let html = filmsArr.map((f, i) => `
     <div class="film-card">
-      <div class="film-poster" style="background:linear-gradient(160deg, #${Math.floor(Math.random()*0xffffff).toString(16).padStart(6,'0')}18, ${f.color.split(',').map(c=>`${c}cc`).join(',')})">
+      <div class="film-poster" style="background-image:url('${f.img}'); background-size:cover; background-position:center;">
         <div class="film-overlay"></div>
         <div class="film-title">${f.title}<br><span style="color:var(--muted);font-size:.65rem">${f.genre}</span></div>
       </div>
@@ -718,7 +823,10 @@ function renderChannels(trackId, chArr) {
   const track = document.getElementById(trackId);
   let html = chArr.map(c => `
     <div class="ch-card">
-      <div class="ch-icon">${c.icon}</div>
+      <div style="background:#fff; border-radius:8px; padding:6px 10px; display:flex; align-items:center; justify-content:center;">
+  <img src="${c.img}" alt="${c.name}"
+    style="height:28px; max-width:75px; object-fit:contain;">
+</div>
       <div class="ch-name">${c.name}</div>
     </div>
   `).join('');
@@ -782,7 +890,7 @@ function openCartModal() {
     setTimeout(() => toast.classList.remove('show'), 2500);
     return;
   }
-  window.open(`https://wa.me/33600000000?text=Bonjour, je veux commander ${cartCount} abonnement(s) StreamMax IPTV`, '_blank');
+  window.open(`https://wa.me/21625032224?text=Bonjour, je veux commander ${cartCount} abonnement(s) StreamMax IPTV`, '_blank');
 }
 
 // ─── MODAL ────────────────────────────────────────────────
@@ -791,7 +899,7 @@ function openModal(name, price, duration) {
   document.getElementById('modalPlanPrice').textContent = price;
   document.getElementById('modalPlanDuration').textContent = duration;
   document.getElementById('modalWaBtn').onclick = () => {
-    window.open(`https://wa.me/33600000000?text=Bonjour, je veux commander l'offre ${name} à ${price} sur StreamMax IPTV`, '_blank');
+    window.open(`https://wa.me/21625032224?text=Bonjour, je veux commander l'offre ${name} à ${price} sur StreamMax IPTV`, '_blank');
   };
   document.getElementById('modalOverlay').classList.add('open');
 }
@@ -801,6 +909,125 @@ function closeModal(e) {
     document.getElementById('modalOverlay').classList.remove('open');
   }
 }
+// ─── SPORTS DATA ─────────────────────────────────────────
+// ─── SPORTS ──────────────────────────────────────────────
+const sports = [
+  { name: "Ligue des Champions", league: "UEFA", icon: "⭐", img: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=400&q=80" },
+  { name: "Premier League", league: "Angleterre", icon: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", img: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=400&q=80" },
+  { name: "NBA Basketball", league: "USA", icon: "🏀", img: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=400&q=80" },
+  { name: "Formule 1", league: "FIA", icon: "🏎️", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/langfr-960px-F1.svg.png",fit: "contain" },
+  { name: "Roland Garros", league: "Tennis", icon: "🎾", img: "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=400&q=80" },
+  { name: "La Liga", league: "Espagne", icon: "🇪🇸", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/LaLiga_EA_Sports_2023_Vertical_Logo.svg/langfr-500px-LaLiga_EA_Sports_2023_Vertical_Logo.svg.png",fit: "contain" },
+  { name: "Ligue 1", league: "France", icon: "🇫🇷", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Ligue_1_Uber_Eats_logo.svg/330px-Ligue_1_Uber_Eats_logo.svg.png",fit: "contain" },
+  { name: "UFC / MMA", league: "Combat", icon: "🥊", img: "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=400&q=80" },
+  { name: "NFL", league: "USA Football", icon: "🏈", img: "https://images.unsplash.com/photo-1566577739112-5180d4bf9390?w=400&q=80" },
+  { name: "Tour de France", league: "Cyclisme", icon: "🚴", img: "https://images.unsplash.com/photo-1534787238916-9ba6764efd4f?w=400&q=80" },
+];
+
+function renderSports(trackId, arr) {
+  const track = document.getElementById(trackId);
+  let html = arr.map(s => `
+    <div class="sport-card">
+      <img src="${s.img}" alt="${s.name}" loading="lazy" style="object-fit:${s.fit || 'cover'}; background:#0d1424;">
+      <div class="sport-card-overlay">
+        <div class="sport-card-logo">${s.icon}</div>
+        <div class="sport-card-name">${s.name}</div>
+        <div class="sport-card-league">${s.league}</div>
+      </div>
+    </div>
+  `).join('');
+  track.innerHTML = html + html;
+}
+
+renderSports('sportsTrack1', sports);
+renderSports('sportsTrack2', [...sports].reverse());
+
+const matches = [
+  {
+    status: "live", league: "Ligue des Champions", channel: "beIN Sports 1",
+    team1: { name: "Real Madrid", flag: "⚪" },
+    team2: { name: "Man City", flag: "🔵" },
+    score: "2 - 1", minute: "67'"
+  },
+  {
+    status: "live", league: "Premier League", channel: "Canal+",
+    team1: { name: "Arsenal", flag: "🔴" },
+    team2: { name: "Liverpool", flag: "🔴" },
+    score: "0 - 0", minute: "23'"
+  },
+  {
+    status: "upcoming", league: "Ligue 1", channel: "DAZN",
+    team1: { name: "PSG", flag: "🔵" },
+    team2: { name: "Marseille", flag: "⚪" },
+    score: "vs", time: "20:45"
+  },
+  {
+    status: "live", league: "NBA", channel: "ESPN",
+    team1: { name: "Lakers", flag: "🟡" },
+    team2: { name: "Bulls", flag: "🔴" },
+    score: "87 - 91", minute: "Q3"
+  },
+  {
+    status: "upcoming", league: "La Liga", channel: "beIN Sports 2",
+    team1: { name: "Barcelona", flag: "🔵" },
+    team2: { name: "Atletico", flag: "🔴" },
+    score: "vs", time: "21:00"
+  },
+  {
+    status: "upcoming", league: "F1", channel: "Canal+ F1",
+    team1: { name: "Verstappen", flag: "🟠" },
+    team2: { name: "Hamilton", flag: "⚫" },
+    score: "vs", time: "Dimanche 14:00"
+  },
+];
+
+// Render leagues
+const leaguesRow = document.getElementById('leaguesRow');
+leaguesRow.innerHTML = leagues.map((l, i) => `
+  <div class="league-pill ${i === 0 ? 'active' : ''}" onclick="filterLeague(this, '${l.name}')">
+    ${l.icon} ${l.name}
+  </div>
+`).join('');
+
+// Render matches
+function renderMatches(filter) {
+  const grid = document.getElementById('matchesGrid');
+  const filtered = filter === 'Tous' ? matches : matches.filter(m => m.league === filter);
+  grid.innerHTML = filtered.map(m => `
+    <div class="match-card">
+      ${m.status === 'live'
+        ? `<div class="live-dot"><span></span> LIVE · ${m.minute}</div>`
+        : `<div class="upcoming-badge">🕐 ${m.time}</div>`
+      }
+      <div class="match-teams">
+        <div class="team">
+          <div class="team-flag">${m.team1.flag}</div>
+          <div class="team-name">${m.team1.name}</div>
+        </div>
+        <div class="match-score ${m.status === 'upcoming' ? 'upcoming' : ''}">${m.score}</div>
+        <div class="team">
+          <div class="team-flag">${m.team2.flag}</div>
+          <div class="team-name">${m.team2.name}</div>
+        </div>
+      </div>
+      <div class="match-meta">
+        <span class="match-league">🏆 ${m.league}</span>
+        <span class="match-channel">📺 ${m.channel}</span>
+      </div>
+      <button class="watch-btn" onclick="window.open('https://wa.me/33600000000?text=Bonjour, je veux regarder ${m.team1.name} vs ${m.team2.name}')">
+        ${m.status === 'live' ? '▶ Regarder maintenant' : '🔔 Me rappeler'}
+      </button>
+    </div>
+  `).join('');
+}
+
+function filterLeague(el, name) {
+  document.querySelectorAll('.league-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  renderMatches(name);
+}
+
+renderMatches('Tous');
 </script>
 </body>
 </html>
